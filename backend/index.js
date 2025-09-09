@@ -20,5 +20,5 @@ app.get('/', (req, res) => {
 // Start server
 app.listen(PORT, () => {
     connectDB();
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT} in ${process.env.NODE_ENV} mode`);
 });
