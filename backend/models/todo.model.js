@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const todoSchema = new mongoose.schema({
+const todoSchema = new mongoose.Schema({
     content : {
         type : String,
         required : true,
@@ -13,7 +13,7 @@ const todoSchema = new mongoose.schema({
     user : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User',
-        required : true
+        // required : 
     }
 
 }, {timestamps: true});
