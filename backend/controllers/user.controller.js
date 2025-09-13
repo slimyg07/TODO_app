@@ -25,7 +25,7 @@ export const createUser = async (req , res, next) => {
 
         const newUser = await User.create([{username,email,password }], {session});
         
-                console.log("Hii");
+                
 
         const token = jwt.sign({userId : newUser[0].id}, JWT_SECRET, {expiresIn :JWT_EXPIRE});
 
@@ -119,5 +119,32 @@ export const getUser = async (req, res,next) => {
         
     } catch (error) {
         next(error);
+    }
+}
+
+export const deleteUser = async (req,res,next)=>{
+    try {
+        const id = req.params.id;
+        const user = await User.findById({_id : id});
+        if(!user){
+            const error = new Error("No user found, wrong id entered");
+            error.statusCode= 403;
+            throw error;
+        }
+        const deleted = await User.deleteOne({_id : id});
+        if(!deleted){
+            const eee = new Error("Problem at deleting");
+            eee.statusCode = 403;
+            throw eee;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Deleted user",
+
+        })
+
+    } catch (error) {
+        
     }
 }
