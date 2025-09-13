@@ -16,6 +16,7 @@ export const createTodos = async (req ,res, next) =>{
                 success : false,
                 message : "No content in todo"
             })
+            return;
 
         }
 
@@ -43,5 +44,29 @@ export const createTodos = async (req ,res, next) =>{
     }
     finally{
         session.endSession();
+    }
+}
+
+export const getallTodos = async (req ,res , next) =>{
+    try {
+        const todo = await Todo.find();
+        if(!todo){
+            res.status(400).json({
+                success: false,
+                message: "No todos added"
+            })
+            return;
+        }
+        
+        res.status(200).json({
+            success:true,
+            message: "All todos fetched",
+            data: {
+                todo
+            }
+        });
+        
+    } catch (error) {
+        
     }
 }

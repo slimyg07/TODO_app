@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { createTodos } from "../controllers/todos.controller.js";
+import { createTodos, getallTodos } from "../controllers/todos.controller.js";
 
 
 
 const todoRouter = Router();
 
-todoRouter.get("/", (req, res) => {res.send("All todos fetched");});
+todoRouter.get("/",getallTodos);
 
 todoRouter.get("/:todo-id", (req, res) => {res.send("Todo details fetched");});
 
