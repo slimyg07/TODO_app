@@ -67,6 +67,29 @@ export const getallTodos = async (req ,res , next) =>{
         });
         
     } catch (error) {
+        next(error);
+    }
+}
+
+export const getTodo = async (req , res, next)=>{
+    try {
+        const todoId = req.params.todoid;
+        const todo = await Todo.findById({_id : todoId});
+        if(!todo){
+            const error = new Error("Id doesnt exist");
+            error.statusCode = 403;
+            throw error;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Todo fetched",
+            data: {
+                todo
+            }
+        });
         
+    } catch (error) {
+        next(error);
     }
 }
