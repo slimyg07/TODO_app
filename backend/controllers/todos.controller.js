@@ -93,3 +93,29 @@ export const getTodo = async (req , res, next)=>{
         next(error);
     }
 }
+
+export const deleteTodo = async (req,res,next) =>{
+    try {
+        const todoId = req.params.todoid;
+        const todo = Todo.findById({_id : todoId});
+        if(!todo){
+             const error = new Error("No user found, wrong id entered");
+            error.statusCode= 403;
+            throw error;
+        }
+        const deleted =await Todo.deleteOne({_id : todoId});
+        if(!deleted){
+            const eee = new Error("Problem at deleting");
+            eee.statusCode = 403;
+            throw eee;
+        }
+          res.status(200).json({
+            success: true,
+            message: "Deleted Todo"
+
+        })
+
+    } catch (error) {
+        next(error);
+    }
+}
