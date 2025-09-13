@@ -1,6 +1,6 @@
 import { Router } from "express";
 const authRouter = Router();
-import { createUser, loginUser, SignoutUser} from "../controllers/user.controller.js";
+import { createUser, loginUser, SignoutUser,getUser} from "../controllers/user.controller.js";
 
 authRouter.post("/signin", loginUser);
 
@@ -12,8 +12,8 @@ authRouter.post("/signup", createUser);
 authRouter.get("/signout", SignoutUser);
 
 
-authRouter.get("/users", (req, res) => {res.send("All User  details fetched successfully!");
-});
+authRouter.get("/users", getUser);
+
 
 // authRouter.delete("/:id", (req,res) => res.send("User deleted successfully"));
 

@@ -100,3 +100,24 @@ export const SignoutUser = async (req,res,next) => {
         
     }
 }
+
+export const getUser = async (req, res,next) => {
+    try {
+
+        const users = await User.find();
+        if(!users){
+            const error = new Error("No users found");
+            error.statusCode = 403;
+            throw error;
+        }
+
+        res.status(200).json({
+            success : true,
+            message : "Fetched user details",
+            users
+        })
+        
+    } catch (error) {
+        next(error);
+    }
+}
