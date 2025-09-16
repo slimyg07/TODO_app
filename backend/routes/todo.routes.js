@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { createTodos, getallTodos, getTodo,deleteTodo} from "../controllers/todos.controller.js";
-
+import { authorization } from "../middleware/auth.middleware.js";   
 
 
 const todoRouter = Router();
 
-todoRouter.get("/",getallTodos);
+todoRouter.get("/",authorization,getallTodos);
 
 todoRouter.get("/:todoid", getTodo);
 

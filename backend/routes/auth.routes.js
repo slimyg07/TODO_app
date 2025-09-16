@@ -6,12 +6,14 @@ authRouter.post("/signin", loginUser);
 
 authRouter.get("/users", getUser);
 
+authRouter.get("/signout", SignoutUser);
+
 authRouter.get("/:id", getUserdetails);
 
 
 authRouter.post("/signup", createUser);
 
-authRouter.get("/signout", SignoutUser);
+
 
 
 
